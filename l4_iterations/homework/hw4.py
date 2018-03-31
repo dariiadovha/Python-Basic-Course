@@ -50,7 +50,7 @@ while True:
             print('Enter 3 numbers please')
     else:
         print('Enter 3 numbers please')
-
+#try2
 
 
 
