@@ -102,4 +102,11 @@ ENV/
 /site
 
 # mypy
+.idea
 .mypy_cache/
+Include
+Lib
+Scripts
+tcl
+.pip-selfcheck.json
+
