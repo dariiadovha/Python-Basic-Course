@@ -10,27 +10,19 @@ def gen_dict(): #generates random dict with name, surname, phone, card
         symbols = ['-', ' ', '[', ']', random.choice(string.ascii_lowercase), random.choice(string.ascii_uppercase)]
         counter2 = 0
         counter3 = 0
-        phone_number = ['+',]
-        card_number = []
-        if chance == 14:
-            while counter2<11:
-                phone_number.append(random.randint(0,9))
-                counter2+=1
-            phone_number.append(random.choice(symbols))
-        else:
-            while counter2<12:
-                phone_number.append(random.randint(0,9))
+        phone_number = '+'
+        card_number = ''
+        while counter2<11:
+                phone_number += str(random.randint(0,9))
+                if chance == 14:
+                    phone_number += str(random.choice(symbols))
                 counter2+=1
         exp_day = str(random.randint(1,12)) + '/' + str(random.randint(1,9)) + str(random.randint(1,9))
         chance2 = random.randint (1,100)
-        if chance2 == 45:
-            while counter3<15:
-                card_number.append(random.randint(0,9))
-                counter3+=1
-            card_number+=str(random.choice(symbols))
-        else:
-            while counter3<16:
-                card_number.append(random.randint(0,9))
+        while counter3<15:
+                card_number += str(random.randint(0,9))
+                if chance2 == 45:
+                    card_number+=str(random.choice(symbols))
                 counter3+=1
         counter += 1
         temp_dict ={'Name':full_name, 'Phone':phone_number, 'Exp_day':exp_day,'Card':card_number}
@@ -38,18 +30,16 @@ def gen_dict(): #generates random dict with name, surname, phone, card
     return final_list
 
 def card_has_errors(card_number):
-    for el in card_number:
-        try:
-            el_int = int(el)
-        except ValueError or AttributeError:
-            return True
-    return False
+    card_valid = re.match(r'(^[0-9]{16}$)', card_number)
+    if card_valid:
+        return False
+    else:
+        return True
 
 def phone_has_errors(phone):
-    phone1 = phone.pop(0)
-    for el in phone:
-        try:
-            el_int = int(el)
-        except ValueError or AttributeError:
-            return True
-    return False
+    phone_valid = re.match(r'(^'+',[0-9]{11}$)', phone)
+    if phone_valid:
+        return False
+    else:
+        return True
+
